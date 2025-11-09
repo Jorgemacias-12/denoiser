@@ -211,3 +211,8 @@ __marimo__/
 
 # Ignore model file
 *.pth
+
+speechcommands/
+train/
+test/
+val/
