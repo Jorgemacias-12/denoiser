@@ -2,6 +2,7 @@ from colorama import init as colorama_init
 from colorama import Fore, Style
 
 from utils.config import config
+from utils.dataset_downloader import DatasetDownloader
 
 
 def main():
@@ -14,6 +15,10 @@ def main():
     print()
 
     config.load(".env")
+
+    downloader = DatasetDownloader()
+    downloader.run()
+    # print("dataset_dir:", config.get("dataset_dir"))
 
 
 if __name__ == "__main__":
