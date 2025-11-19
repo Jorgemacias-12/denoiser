@@ -216,3 +216,6 @@ speechcommands/
 train/
 test/
 val/
+
+#ignore data/raw folder
+data/raw
