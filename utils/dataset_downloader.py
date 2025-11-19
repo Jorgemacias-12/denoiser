@@ -1,4 +1,3 @@
-# utils/dataset_downloader.py
 from __future__ import annotations
 
 import os
@@ -8,6 +7,7 @@ from urllib.parse import urlparse
 import requests
 from tqdm import tqdm
 from utils.config import config
+from utils.sound import convert_flac_to_wav
 from colorama import Fore, Style
 
 
@@ -44,29 +44,28 @@ class DatasetDownloader:
 
     SUPPORTED = (".tar.gz", ".tgz", ".tar.bz2", ".tar", ".zip", ".gz")
 
-    def __init__(self, root: str | None = None):
+    def __init__(self, root: str, url: str, dataset_name: str):
         """
-        Initialize the downloader using config or defaults.
-
-        Args:
-            root: Optional explicit root path for dataset files.
-                  If None, uses 'dataset_dir' from config or "./data/raw".
+        Constructor corregido: ahora recibe explícitamente url y dataset_name.
+        No usa nada del .env, eso lo maneja el __main__.
         """
-        self.root = root or config.get("dataset_dir") or "./data/raw"
-        self.url = config.get("dataset_url")
-        self.dataset_name = config.get("dataset_name") or "dataset"
+        self.root = root
+        self.url = url
+        self.dataset_name = dataset_name
 
         os.makedirs(self.root, exist_ok=True)
 
-        # Determine filename from URL
-        if self.url:
-            parsed = urlparse(self.url)
-            base = os.path.basename(parsed.path)
-            self.filename = base if base else f"{self.dataset_name}.download"
-        else:
-            self.filename = f"{self.dataset_name}.download"
+        # Nombre real del archivo basado en la URL CORRECTA
+        parsed = urlparse(self.url)
+        base = os.path.basename(parsed.path)
 
+        # Si la URL tiene parámetros (como UrbanSound8K ?download=1)
+        if not base or "." not in base:
+            base = f"{self.dataset_name}.tar.gz"  # fallback seguro
+
+        self.filename = base
         self.target_path = os.path.join(self.root, self.filename)
+
         self.extract_dir: str | None = None
 
     # ------------------------------------------------------------
@@ -228,6 +227,11 @@ class DatasetDownloader:
         # Otherwise, full pipeline
         file_path = self.download(force=force_download)
         self.extract()
+
+        libri_path = os.path.join(self.root, "LibriSpeech")
+
+        if os.path.exists(libri_path):
+            convert_flac_to_wav(libri_path, delete_flac=True)
 
         print(Fore.CYAN +
               f"[INFO] Dataset ready at: {self.extract_dir}" + Style.RESET_ALL)
