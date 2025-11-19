@@ -46,3 +46,6 @@ class Config:
 
     def all(self) -> Dict[str, str]:
         return dict(self._config)
+
+
+config = Config()
