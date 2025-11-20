@@ -7,9 +7,9 @@ from model.model_builder import UNetMini
 from utils.config import config
 
 
-SR = int(config["sample_rate"])
-N_FFT = int(config["n_fft"])
-HOP = int(config["hop_length"])
+SR = int(config.get("sample_rate"))
+N_FFT = int(config.get("n_fft"))
+HOP = int(config.get("hop_length"))
 
 
 def stft_to_wav(mag, phase):

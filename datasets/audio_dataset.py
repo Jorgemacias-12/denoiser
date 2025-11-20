@@ -13,12 +13,23 @@ HOP_LEN = int(config.get("hop_length"))
 
 
 class AudioDenoiseDataset(Dataset):
-    def __init__(self, clean_dir="data/processed/clean", noisy_dir="data/processed/noisy"):
+    def __init__(
+        self,
+        clean_dir="data/processed/clean",
+        noisy_dir="data/processed/noisy",
+        split=None  # 'train', 'val', 'test' o None
+    ):
+        # Si se especifica split, añadimos la subcarpeta
+        if split is not None:
+            clean_dir = os.path.join(clean_dir, split)
+            noisy_dir = os.path.join(noisy_dir, split)
+
         self.clean_files = sorted(glob(os.path.join(clean_dir, "*.wav")))
         self.noisy_files = sorted(glob(os.path.join(noisy_dir, "*.wav")))
 
         assert len(self.clean_files) == len(self.noisy_files), \
             "La cantidad de clean y noisy debe coincidir."
+
 
     def __len__(self):
         return len(self.clean_files)
