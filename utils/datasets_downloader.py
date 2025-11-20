@@ -2,7 +2,6 @@ from utils.dataset_downloader import DatasetDownloader
 from utils.config import config
 from colorama import Fore
 
-
 def download_all_datasets() -> dict:
     """
     Descarga todos los datasets definidos en dataset_list.
@@ -39,9 +38,11 @@ def download_all_datasets() -> dict:
             continue
 
         # Instancia del downloader base
-        downloader = DatasetDownloader(root=root)
-        downloader.url = url
-        downloader.dataset_name = name
+        downloader = DatasetDownloader(
+            url=url,
+            dataset_name=name,
+            root=root
+        )
 
         # Ejecutar pipeline
         downloader.run()
