@@ -11,7 +11,6 @@ SAMPLE_RATE = int(config.get("sample_rate"))
 CLIP_SECONDS = int(config.get("clip_seconds"))
 SNR_MIN = int(config.get("snr_min"))
 SNR_MAX = int(config.get("snr_max"))
-
 TARGET_SAMPLES = SAMPLE_RATE * CLIP_SECONDS
 
 def load_and_process(path, sample_rate=SAMPLE_RATE):

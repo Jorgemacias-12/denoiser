@@ -3,7 +3,7 @@ from colorama import Fore, Style
 
 from utils.config import config
 from utils.datasets_downloader import download_all_datasets
-from utils.prepare_data import generate_pairs_dataset
+import utils.prepare_data  
 from utils.device import get_device
 
 
@@ -38,7 +38,7 @@ def main():
           "[OK] Todo listo para preparar datos." + Style.RESET_ALL)
     
     print(Fore.CYAN + "[INFO] Preparando dataset procesado (clean/noisy)...")
-    generate_pairs_dataset()
+    utils.prepare_data()
     print(Fore.GREEN + "[OK] Datos procesados.\n")
 
     print(Fore.CYAN + "[INFO] Creando dataset Pytorch...")

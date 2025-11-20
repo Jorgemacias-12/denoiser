@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 from typing import Dict, Optional
 from colorama import Fore, Style
+from pathlib import Path
 
 
 class Config:
@@ -49,3 +50,8 @@ class Config:
 
 
 config = Config()
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # carpeta raíz donde está __main__.py
+ENV_PATH = BASE_DIR / ".env"
+
+config.load(str(ENV_PATH))
