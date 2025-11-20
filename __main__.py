@@ -52,19 +52,19 @@ def main():
 
     dataset_train = AudioDenoiseDataset(
         clean_dir="data/processed/clean",
-        noisy_dir="data/processed/noisy", 
+        noisy_dir="data/processed/noise", 
         split ="train"
     )
 
     dataset_val = AudioDenoiseDataset(
         clean_dir="data/processed/clean",
-        noisy_dir="data/processed/noisy", 
+        noisy_dir="data/processed/noise", 
         split ="val"
     )
 
     dataset_test = AudioDenoiseDataset(
         clean_dir="data/processed/clean",
-        noisy_dir="data/processed/noisy", 
+        noisy_dir="data/processed/noise", 
         split ="test"
     )
 
