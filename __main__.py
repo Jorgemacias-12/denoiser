@@ -3,7 +3,7 @@ from colorama import Fore, Style
 
 from utils.config import config
 from utils.datasets_downloader import download_all_datasets
-import utils.prepare_data  
+from utils.prepare_data import main as prepare_data
 from utils.device import get_device
 
 
@@ -36,9 +36,11 @@ def main():
 
     print("\n" + Fore.GREEN +
           "[OK] Todo listo para preparar datos." + Style.RESET_ALL)
-    
+
     print(Fore.CYAN + "[INFO] Preparando dataset procesado (clean/noisy)...")
-    utils.prepare_data()
+
+    prepare_data()
+
     print(Fore.GREEN + "[OK] Datos procesados.\n")
 
     print(Fore.CYAN + "[INFO] Creando dataset Pytorch...")
@@ -50,7 +52,8 @@ def main():
 
     dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
 
-    print(Fore.GREEN + f"[OK] Dataset cargado. Total muestras: {len(dataset)}\n")
+    print(Fore.GREEN +
+          f"[OK] Dataset cargado. Total muestras: {len(dataset)}\n")
 
     device = get_device()
     print(Fore.CYAN + f"[INFO] Usando dispositivo: {device}\n")
