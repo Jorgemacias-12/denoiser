@@ -7,9 +7,9 @@ from torch.utils.data import Dataset
 
 from utils.config import config
 
-SAMPLE_RATE = int(config["sample_rate"])
-N_FFT = int(config["n_fft"])
-HOP_LEN = int(config["hop_length"])
+SAMPLE_RATE = int(config.get("sample_rate"))
+N_FFT = int(config.get("n_fft"))
+HOP_LEN = int(config.get("hop_length"))
 
 
 class AudioDenoiseDataset(Dataset):
