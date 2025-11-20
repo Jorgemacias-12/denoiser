@@ -7,7 +7,7 @@ from utils.prepare_data import main as prepare_data
 from utils.device import get_device
 
 from model.model_builder import UNetSpectral
-from utils.train.trainer import Trainer
+from utils.trainer.trainer import Trainer
 
 from datasets.audio_dataset import AudioDenoiseDataset
 from torch.utils.data import DataLoader
