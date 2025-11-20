@@ -59,7 +59,7 @@ def main():
     dataset_val = AudioDenoiseDataset(
         clean_dir="data/processed/clean",
         noisy_dir="data/processed/noisy", 
-        split ="train"
+        split ="val"
     )
 
     train_loader = DataLoader(dataset_train, batch_size=8, shuffle=True)
