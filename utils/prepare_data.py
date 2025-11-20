@@ -45,8 +45,8 @@ def add_noise(clean, noise, snr_db):
     return clean + noise_scaled
 
 def main():
-    clean_root = config["dataset_clean_dir"]
-    noise_root = config["dataset_noise_dir"]
+    clean_root = config.get("dataset_clean_dir")
+    noise_root = config.get("dataset_noise_dir")
 
     clean_files = glob(os.path.join(clean_root, "**", "*.wav"), recursive=True)
     noise_files = glob(os.path.join(noise_root, "**", "*.wav"), recursive=True)
