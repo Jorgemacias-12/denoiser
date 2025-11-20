@@ -105,14 +105,17 @@ class UNetSpectral(nn.Module):
 
         self.up_blocks = nn.ModuleList(up_blocks)
 
-        # Final conv to map to single-channel magnitude or mask
-        self.final_conv = nn.Sequential(
-            nn.Conv2d(mid_ch, self.base_channels, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(self.base_channels),
-            nn.PReLU(),
-            nn.Conv2d(self.base_channels, 1, kernel_size=1)
-        )
+        # mid_ch ahora es el nº de canales que sale del último Upsample
+        final_in_ch = mid_ch
 
+        # Final conv para mapear a 1 canal (máscara o magnitud)
+        self.final_conv = nn.Sequential(
+            nn.Conv2d(final_in_ch, final_in_ch, kernel_size=3, padding=1, bias=False),
+            nn.BatchNorm2d(final_in_ch),
+            nn.PReLU(),
+            nn.Conv2d(final_in_ch, 1, kernel_size=1)
+        )
+        
         # If mask_output, use sigmoid in forward; otherwise ReLU or identity (we'll return raw)
         self._init_weights()
 
