@@ -62,11 +62,19 @@ def main():
         split ="val"
     )
 
+    dataset_test = AudioDenoiseDataset(
+        clean_dir="data/processed/clean",
+        noisy_dir="data/processed/noisy", 
+        split ="test"
+    )
+
     train_loader = DataLoader(dataset_train, batch_size=8, shuffle=True)
     val_loader = DataLoader(dataset_val, batch_size=8, shuffle=False)
+    test_loader = DataLoader(dataset_test, batch_size=8, shuffle=False)
 
     print(Fore.GREEN + f"[OK] Train samples: {len(dataset_train)}")
     print(Fore.GREEN + f"[OK] Val samples: {len(dataset_val)}\n")
+    print(Fore.CYAN +  f"[OK] Val samples: {len(dataset_test)}\n")
 
     device = get_device()
     print(Fore.CYAN + f"[INFO] Usando dispositivo: {device}\n")
