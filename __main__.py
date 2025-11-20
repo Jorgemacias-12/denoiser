@@ -3,6 +3,10 @@ from colorama import Fore, Style
 
 from utils.config import config
 from utils.datasets_downloader import download_all_datasets
+from utils.prepare_data import generate_pairs_dataset
+
+from datasets.audio_dataset import AudioDenoiseDataset
+from torch.utils.data import DataLoader
 
 
 def main():
@@ -31,7 +35,23 @@ def main():
     print("\n" + Fore.GREEN +
           "[OK] Todo listo para preparar datos." + Style.RESET_ALL)
     
-    
+    print(Fore.CYAN + "[INFO] Preparando dataset procesado (clean/noisy)...")
+    generate_pairs_dataset()
+    print(Fore.GREEN + "[OK] Datos procesados.\n")
+
+    print(Fore.CYAN + "[INFO] Creando dataset Pytorch...")
+
+    dataset = AudioDenoiseDataset(
+        clean_dir="data/processed/clean",
+        noisy_dir="data/processed/noisy"
+    )
+
+    dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
+
+    print(Fore.GREEN + f"[OK] Dataset cargado. Total muestras: {len(dataset)}\n")
+
+    """device = get_device()
+    print(Fore.CYAN + f"[INFO] Usando dispositivo: {device}\n")"""
 
 
 if __name__ == "__main__":
