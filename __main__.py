@@ -30,6 +30,8 @@ def main():
 
     print("\n" + Fore.GREEN +
           "[OK] Todo listo para preparar datos." + Style.RESET_ALL)
+    
+    
 
 
 if __name__ == "__main__":
