@@ -16,7 +16,7 @@ class AudioDenoiseDataset(Dataset):
     def __init__(
         self,
         clean_dir="data/processed/clean",
-        noisy_dir="data/processed/noisy",
+        noisy_dir="data/processed/noise",
         split=None  # 'train', 'val', 'test' o None
     ):
         # Si se especifica split, añadimos la subcarpeta
