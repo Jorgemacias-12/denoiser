@@ -7,10 +7,10 @@ from glob import glob
 from tqdm import tqdm
 from utils.config import config
 
-SAMPLE_RATE = int(config["sample_rate"])
-CLIP_SECONDS = int(config["clip_seconds"])
-SNR_MIN = int(config["snr_min"])
-SNR_MAX = int(config["snr_max"])
+SAMPLE_RATE = int(config.get("sample_rate"))
+CLIP_SECONDS = int(config.get("clip_seconds"))
+SNR_MIN = int(config.get("snr_min"))
+SNR_MAX = int(config.get("snr_max"))
 
 TARGET_SAMPLES = SAMPLE_RATE * CLIP_SECONDS
 

@@ -4,6 +4,8 @@ from colorama import Fore, Style
 from utils.config import config
 from utils.datasets_downloader import download_all_datasets
 from utils.prepare_data import generate_pairs_dataset
+from utils.device import get_device
+
 
 from datasets.audio_dataset import AudioDenoiseDataset
 from torch.utils.data import DataLoader
@@ -50,8 +52,8 @@ def main():
 
     print(Fore.GREEN + f"[OK] Dataset cargado. Total muestras: {len(dataset)}\n")
 
-    """device = get_device()
-    print(Fore.CYAN + f"[INFO] Usando dispositivo: {device}\n")"""
+    device = get_device()
+    print(Fore.CYAN + f"[INFO] Usando dispositivo: {device}\n")
 
 
 if __name__ == "__main__":
