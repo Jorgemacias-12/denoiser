@@ -27,10 +27,6 @@ class AudioDenoiseDataset(Dataset):
         self.clean_files = sorted(glob(os.path.join(clean_dir, "*.wav")))
         self.noisy_files = sorted(glob(os.path.join(noisy_dir, "*.wav")))
 
-        assert len(self.clean_files) == len(self.noisy_files), \
-            "La cantidad de clean y noisy debe coincidir."
-
-
     def __len__(self):
         return len(self.clean_files)
 
@@ -42,7 +38,7 @@ class AudioDenoiseDataset(Dataset):
 
     def __getitem__(self, idx):
         clean_path = self.clean_files[idx]
-        noisy_path = self.noisy_files[idx]
+        noisy_path = np.random.choice(self.noisy_files)
 
         clean_mag = self.load_stft(clean_path)
         noisy_mag = self.load_stft(noisy_path)
