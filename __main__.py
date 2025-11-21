@@ -108,7 +108,7 @@ def main():
         print(Fore.YELLOW + f"\n=== Epoch {epoch}/{EPOCHS} ===")
 
         train_loss = trainer.train_epoch(train_loader)
-        val_loss = trainer.validate(val_loader)
+        val_loss = trainer.validate_epoch(val_loader)
 
         print(Fore.GREEN + f"[INFO] Train Loss: {train_loss:.4f}")
         print(Fore.CYAN + f"[INFO] Val   Loss: {val_loss:.4f}\n")
